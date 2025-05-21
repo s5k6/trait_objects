@@ -94,20 +94,31 @@ fn main() {
     print_and_discover(&b);
 
 
-    // Huh ?
+    // Looking good...
 
     println!("-- combined trait in vector (commented out)");
 
     #[allow(unused_variables)]
     let items: Vec<&dyn CombinedTrait> = vec!(&a, &b);
 
-    /* switching comment for broken code
+    for i in 0..items.len() {
+        items[i].print();
+        match items[i].discover() {
+            IsA(a) => a.only_a(),
+            IsB(b) => b.only_b(),
+        }
+    }
+
+
+    // These two don't compile, and I don't understand why.
+
+    /*
     print_list(&items);
     // */
 
-    /* switching comment for broken code
-    for i in items {
-        print_and_discover(&i);
+    /*
+    for i in items.iter() {
+        print_and_discover(i);
     }
     // */
 }
